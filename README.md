@@ -9,7 +9,7 @@ Does not work so well with the ancestral samplers (euler a).
 # Interpolate
 
 ### Very basic instruction: ###
-* a) download the interpolate.py and put it in your scripts folder of automatic1111. restart gui if it is running
+* a) download the interpolate.py and put it in your scripts folder of automatic1111. Restart gui if it is running
 * b) on img2img, select interpolate from dropdown.
 * c) put your first image into the image input, your second image into the image input provided by the script near the bottom
 * d) think of a prompt for your first image, lets call this promptA, and a second prompt for the second image, promptB
@@ -19,12 +19,12 @@ Does not work so well with the ancestral samplers (euler a).
 
 
 ### Overview: ### 
-An img2img script to produce in-between images. To that end one defines the interpolation ratio as number between 0 and 1. There are two main applications:
+An img2img script to produce in-between images. To that end one defines the interpolation ratio as a number between 0 and 1. There are two main applications:
 
 a) Upload a second input image in the area the script provides for that purpose in addition to the primary input image of img2img. Then the script will blend the two input images at the interpolation ratio to base the actual input to img2img on. This way you can transition smoothly(relatively) from one input image to another. It can be useful to put a noise image as image 2. I have provided some interesting noise files for that purpose.
 
 b) The script will search prompt and negative prompt for "<number a>\~<number b>" (that's a tilde between the numbers), and replace this by the linear interpolation of <number a> and <number b> according to the interpolation ratio. So for example "0.5\~1.5" will be replaced by 0.6 at interpolation ratio 0.1, and 1.0 at interpolation ratio 0.5. You can also use negative numbers, and use an arbitrary number of these statements, assuming they do not overlap. The main purpose is to go smoothly from one prompt to another, via "<prompt a>:1\~0 AND <prompt b>:0\~1", so for example "a cat, highly detailed, by greg rutkowski:1\~0 AND a dog, sharp focus, award-winning phot:0\~1" will interpolate from a cat painting to a dog photo.
-Both a) and b) can be combined. In both cases all other settings remain the same, in particular the seed does not change (for an eception see extra)
+Both a) and b) can be combined. In both cases all other settings remain the same, in particular the seed does not change (for an exception see "Extra" below)
 
 In the interpolate field, you can put a comma seperated list of
 
@@ -43,4 +43,4 @@ Useful for inpainting.
 When unticked, all of input image 1 is mixed with all of input image 2. When ticked, instead input image 2 is rescaled to the rectangle incribed by the mask, and then only blended with image 1 inside the mask. Combine with using the cropping tool of the image 2 UI to do a very targeted blending. Hint: Use denoising 0 and interpolate 0.5 to quickly see if you selected a good cropping area.
 
 ### Interpolate in latent: ###
-When ticked, the image interpolation will be performed on the latent representations instead of the pixel space blending. This is somewhat experimental, put seems to lead to better images. More experimentation needed. 
+When ticked, the image interpolation will be performed on the latent representations instead of the pixel space blending. This is somewhat experimental, but seems to lead to better images. More experimentation needed. 
